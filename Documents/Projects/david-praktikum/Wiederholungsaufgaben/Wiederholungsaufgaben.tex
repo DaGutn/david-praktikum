@@ -1,0 +1,162 @@
+\documentclass[titlepage = firstcover]{scrartcl}
+\usepackage[aux]{rerunfilecheck}
+\usepackage{fontspec}
+\usepackage[main=ngerman, english, french]{babel}
+
+% mehr Pakete hier
+\usepackage{expl3}
+\usepackage{xparse}
+
+%Mathematik------------------------------------------------------
+\usepackage{amsmath}   % unverzichtbare Mathe-Befehle
+\usepackage{amssymb}   % viele Mathe-Symbole
+\usepackage{mathtools} % Erweiterungen fuÌˆr amsmath
+\usepackage[
+  math-style=ISO,    % \
+  bold-style=ISO,    % |
+  sans-style=italic, % | ISO-Standard folgen
+  nabla=upright,     % |
+  partial=upright,   % /
+]{unicode-math}% "Does exactly what it says on the tin."
+\usepackage[section, below]{placeins}
+
+% Laden von OTF-Mathefonts
+% ErmoÌˆglich Unicode Eingabe von Zeichen: Î± statt \alpha
+
+\setmathfont{Latin Modern Math}
+%\setmathfont{Tex Gyre Pagella Math} % alternativ zu Latin Modern Math
+\setmathfont{XITS Math}[range={scr, bfscr}]
+\setmathfont{XITS Math}[range={cal, bfcal}, StylisticSet=1]
+
+\AtBeginDocument{ % wird bei \begin{document}
+  % werden sonst wieder von unicode-math uÌˆberschrieben
+  \RenewDocumentCommand \Re {} {\operatorname{Re}}
+  \RenewDocumentCommand \Im {} {\operatorname{Im}}
+}
+\usepackage{mleftright}
+\setlength{\delimitershortfall}{-1sp}
+
+%Sprache----------------------------------------------------------
+\usepackage{microtype}
+\usepackage{xfrac}
+\usepackage[autostyle]{csquotes}    % babel
+\usepackage[unicode, pdfusetitle]{hyperref}
+\usepackage{bookmark}
+\usepackage[shortcuts]{extdash}
+%Einstellungen hier, z.B. Fonts
+\usepackage{booktabs} % Tabellen
+
+
+\title{Wiederholungsaufgaben}
+\author{
+    David Gutnikov\\
+    \href{mailto:david.gutnikov@tu-dortmund.de}{david.gutnikov@tu-dortmund.de}
+}
+
+\begin{document}
+    \maketitle
+    \newpage    
+    %\tableofcontents
+    \newpage
+
+    \section*{1. Aufgabe}
+        \subsection*{1.1 Aufgabe}
+            Der Mittelwert $\overline{x}$ einer normalverteilten Messgröße $x$, wie es die meisten physikalisch relevanten Messgrößen sind, ist der Wert, der am meisten erwartet wird. Also der Erwartungswert. Eine Art der Berechnung sieht wie folgt aus mit der Anzahl $N$ der Messungen $x_\text{i}$:
+            \begin{equation*}
+                \overline{x} = \frac{1}{N} \sum_{\text{i}=1}^{N} x_\text{i}
+            \end{equation*}
+
+        \subsection*{1.2 Aufgabe}
+            Die Standardabweichung $s$ besagt inwieweit die Messwerte verteilt sind und ist wie folgt zu berechnen:
+            \begin{equation*}
+                s = \sqrt{\frac{\sum_{\text{i}=1}^{N} (x_\text{i} - \overline{x})^2}{N - 1}}
+            \end{equation*}
+        
+        \subsection*{1.3 Aufgabe}
+            Die Standardabweichung ist ein Maß für die Streuung der Messwerte. Der Fehler des Mittelwerts higegen unterscheidet sich von der Standardabweichung um den Faktor $\frac{1}{\sqrt{N}}$, wo $N$ wieder die Anzahl der Messwerte ist.
+            \begin{equation*}
+                s = \sqrt{\frac{\sum_{\text{i}=1}^{N} (x_\text{i} - \overline{x})^2}{N(N - 1)}}
+            \end{equation*}
+
+    \section*{2. Aufgabe}
+        \begin{align*}
+            R_\text{innen} = 10 \pm 1 \\
+            R_\text{außen} = 15 \pm 1 \\
+            h = 20 \pm 1           
+        \end{align*}
+        Das Volumen $V$ eines Hohlzylinders mit solchen Maßen wird wie folgt berechnet:
+        \begin{equation*}
+            V = \pi \cdot (R_\text{außen}^2 - R_\text{innen}^2) \cdot h
+        \end{equation*}
+        Der dazugehörige Fehler nach der Gaußschen Fehlerfortpflanzung:
+        \begin{equation*}
+            \Delta V = \sqrt{\biggl(\frac{\partial V}{\partial h} \Delta h \biggr)^2 + \biggl(\frac{\partial V}{\partial R_\text{innen}} \Delta R_\text{innen} \biggr)^2 + \biggl(\frac{\partial V}{\partial R_\text{außen}} \Delta R_\text{außen} \biggr)^2}
+        \end{equation*}
+        Also ist das Volumen ca.
+        \begin{equation*}
+            V = (7.9 \pm 2.3) \cdot 10^3 \, \mathrm{cm}
+        \end{equation*}
+        groß.
+
+    \section*{3. Aufgabe}
+        \begin{table}[h]
+            \centering
+            \caption{Tabelle mit Liniennummer, Spannung $U$ in $\mathrm{V}$ und Abstand}
+            \label{tab:tabelle1}
+            \begin{tabular}{c c c}
+                \toprule
+                Liniennummer & $U$ / $\mathrm{V}$ & D / $\mathrm{mm}$ \\
+                \midrule
+                1 & -19.5 & 0  \\
+                2 & -16.1 & 6  \\
+                3 & -12.4 & 12 \\
+                4 & -9.6  & 18 \\
+                5 & -6.2  & 24 \\
+                6 & -2.4  & 30 \\
+                7 & 1.2   & 36 \\
+                8 & 5.1   & 42 \\
+                9 & 8.3   & 48 \\
+                \bottomrule
+            \end{tabular}
+        \end{table}
+        \FloatBarrier
+        \noindent
+        Die Abstandswerte wurden mit der Formel
+        \begin{equation*}
+            D = (N_\text{Linie} - 1) \cdot 6 \, \mathrm{mm}
+        \end{equation*}
+        berechnet.
+        \begin{figure}[h]
+            \centering
+            \caption{Die Werte von $D$ gegen $U$ aufgetragen und die lineare Regression zu diesen Messwerten wird hier dargestellt.}
+            \label{fig:figure1}
+            \includegraphics[width = 0.8\linewidth]{Regressiongraph.pdf}
+        \end{figure}
+        %\FloatBarrier
+        \noindent
+        Die Steigung $m$ und der y-Achsenabschnitt $b$ der Regressionsgeraden in Abbildung \ref{fig:figure1} haben folgende Werte:
+        \begin{align*}
+            m = (1.7 \pm 0.02) \, \frac{\mathrm{mm}}{\mathrm{V}} \\
+            b = (33.9 \pm 0.21) \, \mathrm{mm}
+        \end{align*}
+
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

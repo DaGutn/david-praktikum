@@ -1,0 +1,144 @@
+\documentclass[titlepage = firstcover]{scrartcl}
+\usepackage[aux]{rerunfilecheck}
+\usepackage{fontspec}
+\usepackage[main=ngerman, english, french]{babel}
+
+% mehr Pakete hier
+\usepackage{expl3}
+\usepackage{xparse}
+\usepackage{pdfpages}
+
+%Mathematik------------------------------------------------------
+\usepackage{amsmath}   % unverzichtbare Mathe-Befehle
+\usepackage{amssymb}   % viele Mathe-Symbole
+\usepackage{mathtools} % Erweiterungen fuÌˆr amsmath
+\usepackage[
+  math-style=ISO,    % \
+  bold-style=ISO,    % |
+  sans-style=italic, % | ISO-Standard folgen
+  nabla=upright,     % |
+  partial=upright,   % /
+]{unicode-math}% "Does exactly what it says on the tin."
+\usepackage[section, below]{placeins}
+\usepackage{upgreek}
+
+% Laden von OTF-Mathefonts
+% ErmoÌˆglich Unicode Eingabe von Zeichen: Î± statt \alpha
+
+\setmathfont{Latin Modern Math}
+%\setmathfont{Tex Gyre Pagella Math} % alternativ zu Latin Modern Math
+\setmathfont{XITS Math}[range={scr, bfscr}]
+\setmathfont{XITS Math}[range={cal, bfcal}, StylisticSet=1]
+
+\AtBeginDocument{ % wird bei \begin{document}
+  % werden sonst wieder von unicode-math uÌˆberschrieben
+  \RenewDocumentCommand \Re {} {\operatorname{Re}}
+  \RenewDocumentCommand \Im {} {\operatorname{Im}}
+}
+\usepackage{mleftright}
+\setlength{\delimitershortfall}{-1sp}
+
+%Sprache----------------------------------------------------------
+\usepackage{microtype}
+\usepackage{xfrac}
+\usepackage[autostyle]{csquotes}    % babel
+\usepackage[german, unicode, pdfusetitle]{hyperref}
+\usepackage{bookmark}
+\usepackage[shortcuts]{extdash}
+%Einstellungen hier, z.B. Fonts
+\usepackage{booktabs} % Tabellen
+\usepackage{a4}
+\usepackage{float}
+
+\setlength{\parindent}{0pt}
+
+
+\title{Röntgenemission und -absorption}
+\author{David Gutnikov \\
+        \href{mailto:david.gutnikov@tu-dortmund.de}{david.gutnikov@tu-dortmund.de}}
+\date{Abgabe am 17.05.2020}
+
+
+\begin{document}
+
+    \maketitle
+    \newpage
+    \tableofcontents
+    \newpage
+
+    \section{Zielsetzung}
+      Das Emissionsspektrum einer Cu-Röntgenröhre und verschiedene Absorptionsspektren sollen aufgenommen und analysiert werden.
+
+    \section{Theorie}
+
+      \subsection{Röntgenstrahlung}
+        Um Röntgenstrahlung zu erzeugen werden in einer evakuierten Röhre Elektronen aus einer Glühkathode gelöst und mithilfe einer Anode beschleunigt. Die herausgelösten Elektronen treffen auf das Anodenmaterial und verursachen Röntgenstrahlung.
+
+        Das Röntgenspektrum setzt sich aus zwei Strahlungsarten zusammen, der kontinuirlichen Bremsstrahlung und der charakteristischen Röntgenstrahlung.
+
+        Auslöser für die kontinuirliche Bremsstrahlung ist die Abbremsung eines Elektrons im elektrischen Feld eines Atoms des Anodenmaterials. Es wird ein Photon ausgesandt, dessen Energie dem Energieverlust des Elektrons entspricht. Da die kinetische Energie eines Elektrons kontinuirlich ist, ist auch die Energie des erzeugten Photons und somit die Bremsstrahlung kontinuirlich. Es existiert eine minimale Wellenlänge $\lambda_\text{min}$ im Bremsspektrum, wo die das Elektron vollständig abgebremst wird d.h. seine gesamte kinetische Energie $E_\text{kin} = e U$ wird in Strahlungsenergie $E = h \nu = \frac{h c}{\lambda}$ umgewandelt.
+        \begin{equation}
+            \lambda_\text{min} = \frac{h c}{e U}
+        \end{equation}
+
+        Die auftreffenden Elektronen regen Atome im Anodenmaterial an, d.h. Elektronen in den äußeren Schalen werden auf höhere Energieniveaus $E_\text{m}$ bzw. Schalen gehoben. Nach kurzer Zeit fallen andere Elektronen auf das niedrigere Energieniveau $E_\text{n}$ zurück, um die entstandene Lücke zu schließen. Dabei wird ein Röntgenquant, dessen Energie der Eniergiedifferenz $E_\text{m} - E_\text{n} = h \nu$ zwischen den beiden Energieniveaus entspricht, emmitiert. Diese Energiedifferenz kann nur quantisierte Werte annehmen, weshalb auch die Photonen, also die Strahlung nur charakteristische Werte hat.
+
+        Diesen Übergängen werden Namen zugeordnet wie z.B. $K_\alpha$, $K_\beta$ oder $L_\alpha$. Die Buchstaben K, L, M usw. beziehen sich darauf auf welcher Schale der Übergang endet. Die griechischen Buchstaben zeigen die Differenz der Hauptquantenzahl $n$ beim Übergang bzw. von welcher Schale das Elektron in die Lücke springt, an. $\alpha$ bedeutet, dass das Elektron aus der nächsthöheren Schale kommt ($\Updelta n = 1$). Steht dort $\beta$ kommt das Elektron von einer Position zwei Schalen darüber ($\Updelta n = 2$) usw..
+
+        Die Coulomb-Anziehung des Kerns eines Mehrelektronenatoms wird durch die Elektronen nach außen hin abgeschwächt. Damit gilt für die Bindungsenergie eines Elektons auf der n-ten Schale:
+        \begin{equation}
+            E_\text{n} = -R_{\infty} z^2_{eff} \cdot \frac{1}{n^2}
+        \end{equation}
+        mit der durch die Abschirmung verringerten Kernladung $z_\text{eff} = z - \sigma$, der Abschirmkonstante $\sigma$ und der Rydbergenergie $R_{\infty}$.
+
+        Da die äußeren Elektronen eines Atoms unterschiedliche Bahndrehimpulse und Spins besitzen und deshalb nicht die genau gleiche Bindungsenergie haben, besteht jede charakterische Linie im Röntgenspektrum aus mehreren nah beieinander liegenden Linien. Diese Aufteilung wird Feinstruktur genannt und kann in diesem Versuch nicht erkennbar gemacht werden.
+
+        Drei Prozesse sind für die Absorption von Strahlung in Materie verantwortlich: Compton-Effekt, der Photo-Effekt und die Paarbildung.
+        Die dominanten Absorptionsprozesse von Röntgenstrahlen unter 1 MeV sind der Compton-Effekt und der Photo-Effekt, wie es beispielsweise in \autoref{fig:absorptionsprozesse} für Aluminium zu sehen ist.
+        \begin{figure}[h]
+          \centering
+          \includegraphics[width = 0.5\linewidth]{Absorptionsprozesse_Al.png}
+          \caption{Der Absorptionskoeffizient als Funktion der Energie bei Aluminium.}
+          \label{fig:absorptionsprozesse}
+        \end{figure}
+        \FloatBarrier
+
+        Der Absorptionskoeffizient sinkt mit steigender Energie der Strahlung. Doch ist die Strahlungsenergie gerade größer als die Bindungsenergie $E_\text{n}$ eines Elektrons aus der nächsten inneren Schale, so wird der Absorptionskoeffizient wieder schlagartig größer. Dies wird damit erklärt, dass jetzt mehr Photonen die nötige Energie für den Photoeffekt haben. Durch das zackenhafte Aussehen dieser Sprünge in einem Graphen, werden die zugehörigen Energien $h \nu_\text{abs} = E_\text{n}$, je nachdem aus welcher Schale das herausgelöste Elektron stammt als K-, L-, M-, \dots \, Absorptionskanten bezeichnet.
+        \begin{figure}[h]
+          \centering
+          \includegraphics[width = 0.3\linewidth]{Absorptionskoeffizient.png}
+          \caption{Der Absorptionskoeffizient als Funktion der Energie mit der feinstrukturierten L-Kante und der K-Kante.}
+          \label{fig:absorptionskoeffizient}
+        \end{figure}
+        \FloatBarrier
+
+      \subsection{Bragg-Reflexion}
+        Die Bragg-Bedingung besagt bei welchem Winkel $\alpha$ es zu einer konstruktiven Interferenz von Wellen bei einer Streuung an einem Gitter kommt. Treffen Photonen auf einen Kristall, also auf ein Gitter aus Atomen, wird ein kleiner Teil der Photonen an den Gitterebenen gebeugt. Doch diese Reflexion ist nur dann nennenswert, wenn die einzelnen reflektierten Anteile aus den verschiedenen Gitterebenen konstruktiv interferieren. Es muss deshalb für die Wellenlänge $\lambda$, den Netzebenenabstand $d$, die Glanzwinkel $\alpha$ und die Ordnung des Maximums der konstruktiven Interferenz $n$ die Bragg-Bedingung gelten:
+        \begin{equation}
+          n \lambda = 2 d \sin{\alpha}
+          \label{eqn:bragg}
+        \end{equation}
+        Diese Gleichung ist sehr nützlich für Experimente, da aus dem Glanzwinkel die zugehörige Wellenlänge und somit die Energie der gebeugten Strahlung berechnet werden kann.
+
+    \section{Aufbau und Durchführung}
+      Für jede der nachfolgenden Messungen ist eine Kupfer-Röntgenröhre, ein Lif-Kristall und ein Geiger-Müller-Zählrohr nötig.
+      \subsection{Überprüfung der Bragg-Bedingung}
+        
+
+    \section{Auswertung}
+
+    \section{Diskussion}
+    
+    \section{Daten}
+
+    \newpage
+    \section{Literaturverzeichnis}
+    [1] \textit{Versuchsanleitung V602 - Röntgenemission und -absorption.} TU Dortmund, 2020 \newline
+    [2] Physical Measurement Laboratory: \textit{X-Ray Transition Energies Database}, 10. Mai 2020
+    \url{https://physics.nist.gov/PhysRefData/XrayTrans/Html/search.html} \newline
+    [3] The NIST Reference on Constants, Units and Uncertainty: \textit{Fundamental Physical Constants}, 10. Mai 2020
+    \url{https://physics.nist.gov/cgi-bin/cuu/Value?ecomwl|search_for=atomnuc!} \newline
+    [4] PHYWE: \textit{Comptonstreuung von Röntgenstrahlung}, 13. Mai 2020
+    \url{https://repository.curriculab.net/files/versuchsanleitungen/p2541701/p2541701d.pdf}
+\end{document}
+

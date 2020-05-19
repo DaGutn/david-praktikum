@@ -7,6 +7,7 @@
 \usepackage{expl3}
 \usepackage{xparse}
 \usepackage{pdfpages}
+\usepackage{subcaption}
 
 %Mathematik------------------------------------------------------
 \usepackage{amsmath}   % unverzichtbare Mathe-Befehle
@@ -56,7 +57,7 @@
 \title{Röntgenemission und -absorption}
 \author{David Gutnikov \\
         \href{mailto:david.gutnikov@tu-dortmund.de}{david.gutnikov@tu-dortmund.de}}
-\date{Abgabe am 17.05.2020}
+\date{Abgabe am 19.05.2020}
 
 
 \begin{document}
@@ -87,11 +88,12 @@
 
         Die Coulomb-Anziehung des Kerns eines Mehrelektronenatoms wird durch die Elektronen nach außen hin abgeschwächt. Damit gilt für die Bindungsenergie eines Elektons auf der n-ten Schale:
         \begin{equation}
-            E_\text{n} = -R_{\infty} z^2_{eff} \cdot \frac{1}{n^2}
+            E_\text{n} = -R_{\infty} Z^2_{eff} \cdot \frac{1}{n^2}
+            \label{eqn:bindungsenergie}
         \end{equation}
-        mit der durch die Abschirmung verringerten Kernladung $z_\text{eff} = z - \sigma$, der Abschirmkonstante $\sigma$ und der Rydbergenergie $R_{\infty}$.
+        mit der durch die Abschirmung verringerten Kernladung $z_\text{eff} = Z - \sigma$, der Abschirmkonstante $\sigma$ und der Rydbergenergie $R_{\infty}$. Dabei hat jede Schale eine andere Abschirmkonstante.
 
-        Da die äußeren Elektronen eines Atoms unterschiedliche Bahndrehimpulse und Spins besitzen und deshalb nicht die genau gleiche Bindungsenergie haben, besteht jede charakterische Linie im Röntgenspektrum aus mehreren nah beieinander liegenden Linien. Diese Aufteilung wird Feinstruktur genannt und kann in diesem Versuch nicht erkennbar gemacht werden.
+        Da die äußeren Elektronen eines Atoms unterschiedliche Bahndrehimpulse und Spins besitzen und deshalb nicht die genau gleiche Bindungsenergie haben, besteht jede charakterische Linie (außer die K-Linie) im Röntgenspektrum aus mehreren nah beieinander liegenden Linien. Diese Aufteilung wird Feinstruktur genannt und kann in diesem Versuch nicht erkennbar gemacht werden.
 
         Drei Prozesse sind für die Absorption von Strahlung in Materie verantwortlich: Compton-Effekt, der Photo-Effekt und die Paarbildung.
         Die dominanten Absorptionsprozesse von Röntgenstrahlen unter 1 MeV sind der Compton-Effekt und der Photo-Effekt, wie es beispielsweise in \autoref{fig:absorptionsprozesse} für Aluminium zu sehen ist.
@@ -112,6 +114,19 @@
         \end{figure}
         \FloatBarrier
 
+        Wird die Feinstruktur mitberücksichtigt, wird anstatt \autoref{eqn:bindungsenergie} die Sommerfeldsche Feinstrukturformel zur Bestimmung der Bindungsenergie benutzt.
+        \begin{equation}
+          E_{n,j} = -R_{\infty} \Biggl(z^2_{\text{eff},1} \cdot \frac{1}{n^2} + \alpha^2 z^4_{\text{eff},2} \cdot \frac{1}{n^3} \Biggl(\frac{1}{j + \frac{1}{2}} - \frac{3}{4 n} \Biggr) \Biggr)
+          \label{eqn:bindungsenergiefeinstruktur}
+        \end{equation}
+        Dabei ist $j$ der Gesamtdrehimpuls, $n$ die Hauptquantenzahl des betrachteten Elektrons, $\alpha$ die Sommerfeldsche Feinstrukturkonstante, $R_{\infty}$ die Rydbergenergie und $z_{\text{eff}}$ die effektive Kernladungszahl.
+
+        Für Elektronen in der K-Schale ($n = 1$) kann bei bekannter K-Kante die Abschirmkonstante durch umstellen von \autoref{eqn:bindungsenergiefeinstruktur}bestimmt werden:
+        \begin{equation}
+          \sigma_K = Z - \sqrt{\frac{E_K}{R_{\infty}} - \frac{\alpha^2 Z^4}{4}}
+          \label{eqn:abschirmkonstate_K}
+        \end{equation}
+
       \subsection{Bragg-Reflexion}
         Die Bragg-Bedingung besagt bei welchem Winkel $\alpha$ es zu einer konstruktiven Interferenz von Wellen bei einer Streuung an einem Gitter kommt. Treffen Photonen auf einen Kristall, also auf ein Gitter aus Atomen, wird ein kleiner Teil der Photonen an den Gitterebenen gebeugt. Doch diese Reflexion ist nur dann nennenswert, wenn die einzelnen reflektierten Anteile aus den verschiedenen Gitterebenen konstruktiv interferieren. Es muss deshalb für die Wellenlänge $\lambda$, den Netzebenenabstand $d$, die Glanzwinkel $\alpha$ und die Ordnung des Maximums der konstruktiven Interferenz $n$ die Bragg-Bedingung gelten:
         \begin{equation}
@@ -121,15 +136,184 @@
         Diese Gleichung ist sehr nützlich für Experimente, da aus dem Glanzwinkel die zugehörige Wellenlänge und somit die Energie der gebeugten Strahlung berechnet werden kann.
 
     \section{Aufbau und Durchführung}
-      Für jede der nachfolgenden Messungen ist eine Kupfer-Röntgenröhre, ein Lif-Kristall und ein Geiger-Müller-Zählrohr nötig.
-      \subsection{Überprüfung der Bragg-Bedingung}
-        
+      Für jede der nachfolgenden Messungen wird eine Kupfer-Röntgenröhre, ein Lif-Kristall und ein Geiger-Müller-Zählrohr benötigt.
+      
+      \subsection{Überprüfung der Bragg-Bedingung} \label{sec:braggmessung}
+        Ein Lif-Kristall wird auf einen Winkel von 14° eingestellt und mit Röntgenstrahlung bestrahlt. Dabei wird das Geiger-Müller-Zählrohr in einem Winkelbereich von 26° bis 30° in 0,1° Schritten verstellt, wobei die Integrationszeit pro Messung 5s beträgt.
 
+      \subsection{Emissionspektrum einer Cu-Röntgenröhre aufnehmen} \label{sec:emissionmessung}
+        Hierfür wird das Geiger-Müller-Zählrohr zusammen mit dem Lif-Kristall gedreht. Es soll das detailierte Röntgenspektrum im Winkelbereich von 8° bis 25° in 0,1° Schritten gemessen werden. Die Integrationszeit pro Messung beträgt 10s.
+      
+      \subsection{Absorptionsspektren verschiedener Absorber aufnehmen}
+        Der Versuchsaufbau unterscheidet sich nur dadurch von dem Aufbau in \autoref{sec:emissionmessung}, dass mehrere Messreihen aufgenommen werden, wobei verschiedene Absorber zwischen den Lif-Kristall eingesetzt werden und dass die Integrationszeit 20s beträgt.
+        Bei den Absorbern handelt es sich um Zink, Gallium, Brom, Rubidium, Strontium und Zirkonium.
+    
+    \newpage
     \section{Auswertung}
+      \subsection{Überprüfung der Bragg-Bedingung} \label{sec:braggauswertung}
+        \begin{figure}[h]
+          \centering
+          \includegraphics[width = 0.8\linewidth]{Bragg.png}
+          \caption{Der Graph zu den Messwerten aus \autoref{sec:braggmessung}.}
+          \label{fig:bragg}
+        \end{figure}
+        \FloatBarrier
+
+        Anhand des Graphen wird der Winkel mit der maximalen Rate bestimmt. Der Winkel ist $\theta = 28,2°$, was mit dem theoretischen Wert des Sollwinkels $\theta_\text{theo} = 28°$ die relative Abweichung $a_{\theta} = 0,7 \%$ ergibt.
+      
+      \newpage
+      \subsection{Analyse des Emissionspektrums der Cu-Röntgenröhre}
+        \begin{figure}[h]
+          \centering
+          \includegraphics[width = 0.8\linewidth]{Emissionsspektrum.png}
+          \caption{Das Emissionsspektrum der Cu-Röntgenröhre gegen der Winkel aufgetragen.}
+          \label{fig:emissionCu}
+        \end{figure}
+        \FloatBarrier
+
+        Mit den aufgenommenen Daten ist es nicht möglich die minimale Wellenlänge bzw. die maximale Energie der erzeugten Röntgenstrahlung zu ermitteln, da die Messwerte nicht klein genug sind und keine minimale Wellenlänge am Graphen abgelesen werden kann.
+
+        \begin{figure}
+          \centering
+          \includegraphics[width = 0.8\textwidth]{K_alpha_Linie.png}
+          \caption{Die Messwerte des Peaks zur $\text{K}_{\alpha}$-Linie.}
+          \label{fig:K_alpha_Linie}
+        \end{figure}
+        \FloatBarrier
+
+        Es wird mit Hilfe des Graphen das Auflösungsvermögen der $\text{K}_{\alpha}$-Linie bestimmt. Dazu wird eine Regressionsparabel an den Peak gefittet, es werden die beiden Winkel, die der halben maximalen Intensität entsprechen, abgelesen und die entsprechenden Energieen mit der \autoref{eqn:bragg} und $E = hc/\lambda$ berechnet.
+        \begin{align*}
+          \theta_{\alpha_1} = 22,37° \quad\quad \implies \quad\quad E_{\alpha_1} = 8,09 \, \text{keV} \\
+          \theta_{\alpha_2} = 22,84° \quad\quad \implies \quad\quad E_{\alpha_2} = 7,93 \, \text{keV}
+        \end{align*}
+        Mit diesen Werten und dem aus den Messwerten ermittelten Energiewert der $\text{K}_{\alpha}$-Linie $E_{K,\alpha} = 8,43$ keV wird das Auflösungsvermögen
+        \begin{equation*}
+          A_{\alpha} = \frac{E_{K,\alpha}}{E_{\alpha_1} - E_{\alpha_2}} = 48,63
+        \end{equation*}
+        berechnet.
+
+        \begin{figure}
+          \centering
+          \includegraphics[width = 0.8\textwidth]{K_beta_Linie.png}
+          \caption{Die Messwerte des Peaks zur $\text{K}_{\beta}$-Linie.}
+          \label{fig:K_alpha_Linie}
+        \end{figure}
+        \FloatBarrier
+
+        Hier wird das Auflösungsvermögen der $\text{K}_{\beta}$-Linie bestimmt. Dabei wird genauso verfahren wie bei der $\text{K}_{\alpha}$-Linie.
+        \begin{align*}
+          \theta_{\alpha_1} = 20,06° \quad\quad \implies \quad\quad E_{\alpha_1} = 8,97 \, \text{keV} \\
+          \theta_{\alpha_2} = 20,55° \quad\quad \implies \quad\quad E_{\alpha_2} = 8,77 \, \text{keV}
+        \end{align*}
+        Somit ergibt sich mit dem dem aus den Messwerten ermittelten Energiewert der $\text{K}_{\beta}$-Linie $E_{K,\beta} = 8,91$ keV für das Auflösungsvermögen:
+        \begin{equation*}
+          A_{\beta} = \frac{E_{K,\beta}}{E_{\beta_1} - E_{\beta_2}} = 41,70
+        \end{equation*}
+      
+      \newpage
+      \subsection{Bestimmung der Abschirmkonstanten für Kupfer}
+        Es ergeben sich folgende Formeln für die Emissionsenergien der $\text{K}_{\alpha}$ und -Linie als Differenz der Bindungsenergie der Schalen anhand von \autoref{eqn:bindungsenergie} mit $n = 1$, $m = 2$ und $l = 3$
+        \begin{align}
+          \label{eqn:absorptionsenergie}
+          E_{K,\text{abs}} &= R_{\infty} (Z - \sigma_1)^2 \cdot \frac{1}{n^2} \\
+          \label{eqn:energie_K_alpha}
+          E_{K,\alpha} &= R_{\infty} (Z - \sigma_1)^2 \cdot \frac{1}{n^2} - R_{\infty} (Z - \sigma_2)^2 \cdot \frac{1}{m^2} \\
+          \label{eqn:energie_K_beta}
+          E_{K,\beta} &= R_{\infty} (Z - \sigma_1)^2 \cdot \frac{1}{n^2} - R_{\infty} (Z - \sigma_3)^2 \cdot \frac{1}{l^2}
+        \end{align}
+        Die Bindungsenergie der Elektronen in der K-Schale $E_{K,\text{abs}}$, die der Absorptionsenergie/K-Kante entspricht, kann in diesem Versuch nicht bestimmt werden, weshalb der Literaturwert $E_{K,\text{abs}} = 8,98$ keV [2] benutzt wird. Die Ordnungszahl von Kupfer beträgt $Z = 29$ und die Rydbergenergie beträgt $T_{\infty} = 13,61$ eV.
+
+        Für die Absorptionskoeffizienten $\sigma_1$, $\sigma_2$ und $\sigma_3$ ergeben sich nach umstellen von Gleichungen \ref{eqn:absorptionsenergie}, \ref{eqn:energie_K_alpha} und \ref{eqn:energie_K_beta} folgende Gleichungen.
+        \begin{align}
+          \sigma_1 &= Z - n \cdot \sqrt{\frac{E_{K,\text{abs}}}{R_{\infty}}} = 3,31 \\
+          \sigma_2 &= Z - m \cdot \sqrt{\frac{E_{K,\text{abs}} - E_{K,\alpha}}{R_{\infty}}} = 12,40 \\
+          \sigma_3 &= Z - l \cdot \sqrt{\frac{E_{K,\text{abs}} - E_{K,\beta}}{R_{\infty}}} = 22,38
+        \end{align}      
+      
+      \subsection{Bestimmung der Absorptionskonstanten verschiedenen Absorber und der Rydbergenergie}
+        \begin{figure}[ht]
+          \centering
+          \subfloat[]{\label{Bildchen1}
+            \includegraphics[width=0.47\textwidth]{Zink.png}}\quad
+          \subfloat[]{\label{Bildchen2}
+            \includegraphics[width=0.47\textwidth]{Gallium.png}}\quad
+          \subfloat[]{\label{Bildchen3}
+            \includegraphics[width=0.47\textwidth]{Brom.png}}\quad
+          \subfloat[]{\label{Bildchen4}
+            \includegraphics[width=0.47\textwidth]{Rubidium.png}}\quad
+          \subfloat[]{\label{Bildchen5}
+            \includegraphics[width=0.47\textwidth]{Strontium.png}}\quad
+          \subfloat[]{\label{Bildchen6}
+            \includegraphics[width=0.47\textwidth]{Zirkonium.png}}
+          \caption{In Graphen aufgetragene Messwerte der K-Kanten von (a) Zink, (b) Gallium, (c) Brom, (d) Rubidium, (e) Strontium und (f) Zirkonium.}
+        \end{figure}
+        \FloatBarrier
+
+        Da die K-Kanten eine endlich gute Auflösung haben sie kein zackenartiges Aussehen wie in \autoref{fig:absorptionskoeffizient}. Deshalb wird die ein Wert aus der Mitte der Kante verwendet. Es wird die Mitte zwischen der minimalen und eine maximalen Intensität der Kante bestimmt. Dann wird an dieser Stelle der Winkel abgelesen. Anhand der Bragg-Gleichung \ref{eqn:bragg} und $E = hc/\lambda$ werden somit die Absorptionsenergien der verschiedenen Absorber bestimmt und mit den Literaturwerten verglichen. Mit \autoref{eqn:abschirmkonstate_K} werden aus den Absorptionsenergien die Abschirmkonstanten berechnet und auch mit ihren Literaturwerten verglichen.
+        \begin{table}[h]
+          \centering
+          \caption{Hier sind die Ordnungszahlen, die Glanzwinkel der Mitte der Kante, die zugehörigen Absorptionsnergien der verschiedenen Absorber, die Abschirmkonstanten, die Literaturwerte und die Abweichungen der experimentell bestimmten Werte von den Literaturwerten dargestellt.}
+          \label{tab:absober}
+          \begin{tabular}{c c c c c c c c}
+            \toprule
+            Material & $Z$ & $\theta$ [°] & $E_K$ & $E_{K,\text{lit}}$ & $a_{E}$ [\%] & $\sigma_K$ & $Z_\text{eff}^2$ \\
+            \midrule
+            Zink      & 30 & 18,67 & 9615  & 9660  & 0,46 & 3,62 & 696  \\
+            Gallium   & 31 & 17,36 & 10320 & 10370 & 0,47 & 3,68 & 746  \\
+            Brom      & 35 & 13,24 & 13450 & 13470 & 0,15 & 3,88 & 969  \\
+            Rubidium  & 37 & 11,79 & 15070 & 15200 & 0,90 & 4,10 & 1082 \\
+            Strontium & 38 & 11,14 & 15930 & 16110 & 0,69 & 5,14 & 1079 \\
+            Zirkonium & 40 & 9,96  & 17800 & 18000 & 0,11 & 4,31 & 1274 \\
+            \bottomrule
+          \end{tabular}
+        \end{table}
+        \FloatBarrier
+
+        Um die Rydbergenergie zu bestimmten wird die Absorptionsenergie der K-Kante $E_K$ gegen die quadrierte effektive Ordnungszahl $Z_{\text{eff}} = (Z - \sigma_K)^2$ aufgetragen. Ähneln die so aufgetragenen Messwerte einer Geraden durch den Ursprung, so ist die Rydbergenergie die Steigung der Geraden wie aus \autoref{eqn:bindungsenergie} ersichtlich wird.
+        \begin{equation*}
+          E_\text{n} = R_{\infty} Z^2_{eff}
+        \end{equation*}
+        \begin{figure}
+          \centering
+          \includegraphics[width = 0.8\textwidth]{Rydbergenergie.png}
+          \caption{Graph zur Bestimmung der Rydbergenergie als Steigung der linearen Regression.}
+          \label{fig:rydbergenergie}
+        \end{figure}
+        \FloatBarrier
+
+        Es ergibt sich eine Steigung und somit die Rydbergenergie von $R_{\infty} = 13,91$ eV mit einer Abweichung vom Literaturwert $R_{\infty,\text{Lit}} = 13,61$ eV von $a_{R_\infty} = 0.02 \%$ eV.
 
     \section{Diskussion}
-    
+      Der in  \autoref{sec:braggauswertung} ermittelte Glanzwinkel liegt nah am tatsächlichen Wert des Glanzwinkels, also kann die Apparatur für weitere Versuche genutzt werden.\\
+
+      Die Analyse der $\text{K}_{\alpha}$ und $\text{K}_{\beta}$-Peaks war etwas problematischer, da sie nur aus wenigen Messwerten bestehen. Deshalb sind die Energien der $\text{K}_{\alpha}$ und $\text{K}_{\beta}$-Linien bei weiterer Rechnung mit dem Maximum einer Regressionsparabel nicht so nah an den Literaturwerten als wenn einfach der höchste Messwert abgelesen werden würde. Hier wird aus Kontinuitätsgründen das Maximum der Regressionsparabel verwendet, da die Halbwertsbreite auch mit der Regressionsparabel bestimmt wird. Deswegen ist der Fehler welcher nur aufgrund der Regression ensteht, um ein Vielfaches größer als der eigentliche Wert der Auflösung, weshalb es nicht viel Sinn ergeben würde diesen hier aufzulisten. Es ist mit bloßem Auge zu erkennen, dass die Halbwertbreite der Regressionsparabel die Halbwertbreite des Peaks relativ gut beschreibt. Um es noch einmal zu betonen besteht aufgrund der wenigen Messwerte keine andere Möglichkeit die Halbwertsbreite zu berechnen.\\
+
+      Die Energien und damit auch die Abschirmkonstanten der verschiedenen Absorber stimmen gut mit den Literaturwerten über ein, weswegen auch die Ausgleichgerade, zur Bestimmung der Rydbergenergie als Steigung, auf ein dem Literaturwert nahes Ergebnis kommt.
+      
     \section{Daten}
+      \begin{table}[h]
+        \centering
+        \caption{Die Werte für den Winkel und die Zählraten zur Überprüfung der Bragg-Bedingung.}
+        \label{tab:bragg}
+        \begin{tabular}{c c c c c c c c}
+          \toprule
+          $\theta$ [°] & $n$ [Imp/s] & $\theta$ [°] & $n$ [Imp/s] & $\theta$ [°] & $n$ [Imp/s] & $\theta$ [°] & $n$ [Imp/s] \\
+          \midrule                                                         
+            26.0 & 56.0  & 27.1 & 119.0 & 28.1 & 215.0 & 29.1 & 125.0\\
+            26.1 & 58.0  & 27.2 & 125.0 & 28.2 & 218.0 & 29.2 & 111.0\\
+            26.2 & 54.0  & 27.3 & 141.0 & 28.3 & 215.0 & 29.3 & 107.0\\
+            26.3 & 62.0  & 27.4 & 154.0 & 28.4 & 208.0 & 29.4 & 95.0 \\
+            26.4 & 58.0  & 27.5 & 157.0 & 28.5 & 189.0 & 29.5 & 77.0 \\
+            26.5 & 68.0  & 27.6 & 166.0 & 28.6 & 189.0 & 29.6 & 73.0 \\
+            26.6 & 72.0  & 27.7 & 180.0 & 28.7 & 176.0 & 29.7 & 58.0 \\
+            26.7 & 83.0  & 27.8 & 188.0 & 28.8 & 164.0 & 29.8 & 56.0 \\
+            26.8 & 89.0  & 27.9 & 211.0 & 28.9 & 149.0 & 29.9 & 53.0 \\
+            26.9 & 95.0  & 28.0 & 212.0 & 29.0 & 138.0 & 30.0 & 53.0 \\
+            27.0 & 105.0 \\
+          \bottomrule
+        \end{tabular}
+      \end{table}
+      \FloatBarrier
 
     \newpage
     \section{Literaturverzeichnis}

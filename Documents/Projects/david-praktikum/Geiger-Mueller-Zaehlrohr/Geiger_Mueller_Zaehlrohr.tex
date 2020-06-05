@@ -74,7 +74,7 @@
 
     \section{Theorie}
       \subsection{Funktionsweise und Aufbau des Zählrohrs}
-        Das Geiger-Müller-Zählrohr wird verwendet um die Intensität von ionisierender Strahlung zu messen. Unter diesem Begriff wird $\alpha$, $\beta$ und $\gamma$-Strahlung verstanden. Dabei haben $\alpha$-Teilchen das größte und $\gamma$-Quanten des kleinste spezifische Ionisationsvermögen. Je höher das spez. Ionisationsvermögen, desto mehr Ion-Elektron-Paare werden bei Durchgang durch ein Gas durch Stoßionisation pro zurückgelegte Strecke ionisiert (dazu später mehr). Bei Absorption der Strahlung durch das Gas werden elektrische Impulse erzeugt, welche dann gemessen werden.
+        Das Geiger-Müller-Zählrohr wird verwendet um die Intensität von ionisierender Strahlung zu messen. Unter diesem Begriff wird $\alpha$, $\beta$ und $\gamma$-Strahlung verstanden. Dabei haben $\alpha$-Teilchen das größte und $\gamma$-Quanten des kleinste spezifische Ionisationsvermögen. Je höher das spez. Ionisationsvermögen, desto mehr Ion-Elektron-Paare werden bei Durchgang durch ein Gas durch Stoßionisation pro zurückgelegte Strecke ionisiert (siehe \autoref{par:stossionisation}). Bei Absorption der Strahlung durch das Gas werden elektrische Impulse erzeugt, welche dann gemessen werden.
         \subsubsection{Aufbau}
           \begin{figure}[h]
             \centering
@@ -107,7 +107,7 @@
           \paragraph{Bereich \RN{2}:}
             Die Rekombinationswahrscheinlichkeit sinkt, weswegen jetzt fast alle erzeugten Elektronen am Draht ankommen. Der Ionisationsstrom ist proportional zur Energie und Intesität der einfallenden Strahlung. Doch da die Ladungsimpulse pro einfallendem Teilchen und damit der Ionisationsstrom sehr gering ist, ist das Gerät nur bei hohen Intensitäten oder bei sehr hoch energetischer Strahlung von Nutzen. Ein Aufbau mit dieser Spannung wird Ionisationskammer genannt und ist die Vorstufe zum Zählrohr.
 
-          \paragraph{Bereich \RN{3}:}
+          \paragraph{Bereich \RN{3}:} \label{par:stossionisation}
             Bei dieser Spannung nehmen die erzeugten Elektronen genug Energie auf um mindestens ein weiteres Atom auf ihrem Weg zum Anodendraht zu ionisieren (Stoßionisation). Je höher die Spannung, desto mehr können die primär erzeugten Elektronen, die sekundär erzeugten Elektronen usw. ionisieren. Da dieser Anstieg der Anzahl an Paaren exponentiell geschieht wird dieser Bereich als Townsend-Lawine bezeichnet.
 
             Die durch ein einziges Primärteilchen erzeugte Ladung kann als ein Ladungsimpuls gemessen werden. Auch hier ist die Ladung $Q$ proportional zur Energie und intensität der einfallenden Strahlung (Proportionalitätszählrohr).
@@ -143,7 +143,7 @@
         \subsubsection{Totzeitmessung mit der Zwei-Quellen-Methode}
           Die Totzeit ist die Zeit in der nach einem registrierten Ereignis keine weiteren Ereignisse registriert werden können. Die Totzeitkorrektur ist dann anzuwenden, wenn die Zählrate $n$ groß im Vergleich zur Totzeit $T$ ist. Dann gilt für die wahre Zählrate $n^*$ vereinfachend:
           \begin{equation}
-            n^* = \frac{n}{1 - t n}
+            n^* = \frac{n}{1 - T n}
             \label{eqn:totzeit}
           \end{equation}
           Bei der Zwei-Quellen-Methode werden, wie der Name schon sagt, zwei radioaktive Präparate benutzt. Es werden nacheinander erst die Zählrate eines Präparates $n_1$, die Zählrate des Anderen $n_2$ und die Zählrate beider Präparate zusammen $n_{1+2}$ aufgenommen. Dabei sollen die Präparate einen eigenen Platz relativ zum Zählrohr haben der während der Messungen gleich bleibt. Theoretisch sollte ohne Totzeit $n_{1+2} = n_1 + n_2$ gelten. Doch mit der Totzeit gilt, da beide Präparate gemeinsam eine höhere Intensität und deshalb die Totzeit öfter ausgelöst wird:  $n_{1+2} < n_1 + n_2$.
@@ -156,12 +156,12 @@
           
     
     \section{Durchführung}
-      Es wird ein Versuchaufbau wie in \autoref{} verwendet. Dabei fließt der Ionisationsstrom über den Anodendraht ab und erzeugt einen Spannungsimpuls, welcher über den Kondensator abgekoppelt wird, wenn nötig vergrößert wird und mit einem Zählgerät registriert wird.
+      Es wird ein Versuchaufbau wie in \autoref{fig:versuchsaufbau} verwendet. Dabei fließt der Ionisationsstrom über den Anodendraht ab und erzeugt einen Spannungsimpuls, welcher über den Kondensator abgekoppelt wird, wenn nötig vergrößert wird und mit einem Zählgerät registriert wird.
       \begin{figure}[h]
         \centering
         \includegraphics[width = 0.7\linewidth]{Versuchsaufbau.png}
         \caption{Ein schematischer Versuchsaufbau, um die nötigen Messwerte aufzunehmen.}
-        \label{fig:totzeit_erholungszeit}
+        \label{fig:versuchsaufbau}
       \end{figure}
       \FloatBarrier
 
@@ -186,14 +186,14 @@
       \begin{figure}[h]
         \centering
         \includegraphics[width = 0.8\linewidth]{Plateau.png}
-        \caption{Die Zählrate gegen die Zählrohrspannung aufgetragen.}
+        \caption{Die Zählrate gegen die Zählrohrspannung aufgetragen mit den Werten aus \autoref{tab:Kennwerte}.}
         \label{fig:totzeit_erholungszeit}
       \end{figure}
       \FloatBarrier
       
-      Da die Zählraten Poisson verteilt sind, gilt für die Messunsicherheiten der Werte der Kennlinie $\Updelta n = \sqrt{n}$. Durch die Messpunkte des Plateaus wird eine Gerade mit der Steigung $m$ und dem y-Achsenabschnitt $b$ durchgeführt: $n(U) = m \cdot U + b$. Die Steigung der Geraden beträgt:
+      Da die Zählraten Poisson verteilt sind, gilt für die Messunsicherheiten der Werte der Kennlinie $\Updelta n = \sqrt{n}$. Durch die Messpunkte des Plateaus von ca. 350V bis 650V wird eine Gerade mit der Steigung $m$ und dem y-Achsenabschnitt $b$ durchgeführt: $n(U) = m \cdot U + b$. Die Steigung der Geraden beträgt:
       \begin{equation}
-        m = 1,39 \pm 0,04 \frac{1}{\text{V}}
+        m = 1,39 \pm 0,04 \, \frac{\text{Imp}}{60\text{s} \, \text{V}}
       \end{equation}
       Hiermit wird die Plateausteigung $S$ in $\%$ pro 100V bestimmt. Dazu werden zwei Spannungen mit 100V Differenz im Plateau ausgewählt wie z.B. $U_\text{a} = 400$V und $U_\text{e} = 500$V. Mit diesen Werten wird dann anhand folgender Formel die Steigung berechnet.
       \begin{equation}
@@ -275,13 +275,13 @@
 
     \newpage
     \section{Diskussion}
-      Bei der Analyse des Plateaus wurde eine Plateausteigung von $S = = 1,36 \pm 0,04 \%$ bestimmt. Außerdem ist es am Graphen abzulesen, das der Plateaubereich von ca. 350V bis 650V geht. Dadrüber liegt der zuvermeidende Entladungsbereich und dadrunter der Proportionalbereich.
+      Bei der Analyse des Plateaus wurde eine Plateausteigung von $S = 1,36 \pm 0,04 \%$ bestimmt. Dieser Wert zeigt, dass das Plateau relativ flach ist und lässt auf die gute Qualität des Zählrohres schließen. Außerdem ist es am Graphen abzulesen, das der Plateaubereich von ca. 350V bis 650V geht. Dadrüber liegt der zuvermeidende Entladungsbereich und dadrunter der Proportionalbereich.
 
       Die mit den beiden Methoden bestimmten Totzeiten liegen in der erwarteten Größenordnung von $100 \mu$s.
 
       Die pro einfallendem Teilchen freigesetze Ladung ist, wie es an \autoref{fig:ladungen} zu erkennen ist proportional zur Spannung.
 
-      Alles in allem wurden die theoretisch erwateten Eigenschaften des Geiger-Müller-Zählrohr durch die Messungen bestätigt.
+      Alles in allem wurden die theoretisch erwateten Eigenschaften des Geiger-Müller-Zählrohr durch die Messungen bestätigt und das Zählrohr kann benutzt werden, da es noch eine gute Qualität hat. Doch die Kenngrößen des Zählrohrs sollten in regelmäßigen Abständen geprüft werden, da die Qualität des Zählrohrs, aufgrund der hohen Stromdichten, mit der Zeit abnimmt.
 
           
     \newpage
